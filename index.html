@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>메테오FC 송년회 초대장</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #1a2a4a 0%, #2d3a5a 100%);
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 430px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Sparkling Stars */
+        .stars-container {
+            position: relative;
+            width: 100%;
+            padding-top: 100%;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .main-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+
+        .star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 1.5s ease-in-out infinite;
+        }
+
+        .star::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border-radius: 50%;
+            filter: blur(2px);
+            animation: glow 1.5s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 5px #fff, 0 0 10px #fff; }
+            50% { box-shadow: 0 0 20px #fff, 0 0 30px #ffd700, 0 0 40px #ffd700; }
+        }
+
+        .shooting-star {
+            position: absolute;
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, #ffd700, transparent);
+            animation: shoot 3s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes shoot {
+            0% { transform: translateX(-100px) translateY(0); opacity: 0; }
+            10% { opacity: 1; }
+            30% { transform: translateX(200px) translateY(100px); opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        /* Main Content */
+        .header-text {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .meteor-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #ffeb99;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            background: linear-gradient(90deg, #ff6b35, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        /* Buttons */
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 18px 25px;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-location {
+            background: linear-gradient(135deg, #4a90d9, #357abd);
+            color: white;
+            box-shadow: 0 4px 15px rgba(74, 144, 217, 0.4);
+        }
+
+        .btn-location:hover, .btn-location:active {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 144, 217, 0.6);
+        }
+
+        .btn-attendance {
+            background: linear-gradient(135deg, #ffd700, #ff9500);
+            color: #1a2a4a;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .btn-attendance:hover, .btn-attendance:active {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+        }
+
+        .btn-guestbook {
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+            color: white;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+        }
+
+        .btn-guestbook:hover, .btn-guestbook:active {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal-content {
+            background: linear-gradient(180deg, #2d3a5a 0%, #1a2a4a 100%);
+            margin: 20px auto;
+            padding: 25px;
+            border-radius: 20px;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: white;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Location Info */
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .info-icon {
+            font-size: 24px;
+            min-width: 35px;
+        }
+
+        .info-content h4 {
+            color: #ffd700;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .info-content p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .info-content .sub {
+            font-size: 13px;
+            color: #aaa;
+            margin-top: 5px;
+        }
+
+        .map-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background: #4a90d9;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 14px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Attendance System */
+        .attendance-section {
+            margin-top: 20px;
+        }
+
+        .attendance-instruction {
+            background: rgba(255,215,0,0.1);
+            border: 1px solid rgba(255,215,0,0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #ffeb99;
+        }
+
+        .attendance-zones {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .zone {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 15px;
+            min-height: 100px;
+        }
+
+        .zone-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .zone-attending .zone-title {
+            color: #4ade80;
+        }
+
+        .zone-not-attending .zone-title {
+            color: #f87171;
+        }
+
+        .zone-pending .zone-title {
+            color: #fbbf24;
+        }
+
+        .zone-count {
+            background: rgba(255,255,255,0.1);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .names-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            min-height: 40px;
+        }
+
+        .name-tag {
+            background: rgba(255,255,255,0.1);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .name-tag:active {
+            transform: scale(0.95);
+        }
+
+        .zone-attending .name-tag {
+            background: rgba(74, 222, 128, 0.2);
+            border: 1px solid rgba(74, 222, 128, 0.5);
+        }
+
+        .zone-not-attending .name-tag {
+            background: rgba(248, 113, 113, 0.2);
+            border: 1px solid rgba(248, 113, 113, 0.5);
+        }
+
+        .zone-pending .name-tag {
+            background: rgba(251, 191, 36, 0.2);
+            border: 1px solid rgba(251, 191, 36, 0.5);
+        }
+
+        /* Name Selection Modal */
+        .name-action-modal {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, #2d3a5a 0%, #1a2a4a 100%);
+            border-radius: 20px 20px 0 0;
+            padding: 25px;
+            z-index: 1001;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .name-action-modal.active {
+            transform: translateY(0);
+        }
+
+        .name-action-title {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+
+        .name-action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .action-btn {
+            padding: 15px;
+            border-radius: 12px;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .action-btn.attending {
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            color: white;
+        }
+
+        .action-btn.not-attending {
+            background: linear-gradient(135deg, #f87171, #ef4444);
+            color: white;
+        }
+
+        .action-btn.cancel {
+            background: rgba(255,255,255,0.1);
+            color: #999;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Guestbook Styles */
+        .guestbook-section {
+            margin-top: 20px;
+        }
+
+        .guestbook-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            color: #ffd700;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 16px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #a855f7;
+        }
+
+        .form-group textarea {
+            resize: none;
+            min-height: 80px;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
+
+        .submit-btn {
+            padding: 14px;
+            border-radius: 10px;
+            border: none;
+            background: linear-gradient(135deg, #a855f7, #7c3aed);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .guestbook-entries {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .guestbook-entry {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 15px;
+            border-left: 3px solid #a855f7;
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .entry-name {
+            font-weight: 600;
+            color: #ffd700;
+            font-size: 15px;
+        }
+
+        .entry-date {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .entry-message {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #ddd;
+        }
+
+        .entry-emoji {
+            font-size: 20px;
+            margin-top: 8px;
+        }
+
+        .emoji-picker {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .emoji-btn {
+            font-size: 24px;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .emoji-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .emoji-btn.selected {
+            border-color: #a855f7;
+            background: rgba(168, 85, 247, 0.2);
+        }
+
+        .no-entries {
+            text-align: center;
+            padding: 30px;
+            color: #888;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+        }
+
+        .loading::after {
+            content: '';
+            animation: dots 1.5s infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .footer-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        /* Realtime indicator */
+        .realtime-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            color: #4ade80;
+            margin-left: 10px;
+        }
+
+        .realtime-dot {
+            width: 6px;
+            height: 6px;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 9999;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Stars Image Section -->
+        <div class="stars-container" id="starsContainer">
+            <img src="image1.png.jpg" alt="Meteor Year-End Gathering" class="main-image">
+            <div class="shooting-star" style="top: 20%; left: 10%;"></div>
+            <div class="shooting-star" style="top: 40%; left: 30%; animation-delay: 1.5s;"></div>
+        </div>
+
+        <!-- Header Text -->
+        <div class="header-text">
+            <div class="meteor-icon">☄️</div>
+            <h1 class="title">메테오FC 송년회</h1>
+            <p class="subtitle">
+                <span class="highlight">메둥이들, 2025년 마지막을 함께 불태워보자!</span><br><br>
+                올해도 참 잘 뛰었고, 잘 웃었다.<br>
+                이제는... <strong>잘 모일 시간!</strong>
+            </p>
+        </div>
+
+        <!-- Buttons -->
+        <div class="btn-container">
+            <button class="btn btn-location" onclick="openModal('locationModal')">
+                📍 장소 · 시간 보기
+            </button>
+            <button class="btn btn-attendance" onclick="openModal('attendanceModal')">
+                ✋ 참석 인원 확인
+            </button>
+            <button class="btn btn-guestbook" onclick="openModal('guestbookModal')">
+                📝 방명록 남기기
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-icon">⚽</div>
+            <p>메둥이들, 다 같이 와서<br>올해의 땀과 골, 수고를 건배로 마무리!</p>
+        </div>
+    </div>
+
+    <!-- Location Modal -->
+    <div class="modal" id="locationModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('locationModal')">&times;</span>
+            <h2 class="modal-title">📍 장소 · 시간 안내</h2>
+
+            <div class="info-item">
+                <span class="info-icon">📅</span>
+                <div class="info-content">
+                    <h4>날짜</h4>
+                    <p>12월 12일 (금)</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <span class="info-icon">🕢</span>
+                <div class="info-content">
+                    <h4>시간</h4>
+                    <p>오후 7시 30분</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <span class="info-icon">📍</span>
+                <div class="info-content">
+                    <h4>장소</h4>
+                    <p>크래프트한스 (답십리점)</p>
+                    <p class="sub">서울 동대문구 답십리로 174</p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <span class="info-icon">🚗</span>
+                <div class="info-content">
+                    <h4>주차 안내</h4>
+                    <p>가게 앞 상황에 따라 최대 4대 가능</p>
+                    <p class="sub">• 중상 공영주차장 (1시간 3,000원)<br>• 용답동 공영주차장 (1시간 1,200원)</p>
+                </div>
+            </div>
+
+            <a href="https://map.naver.com/v5/search/크래프트한스 답십리" target="_blank" class="map-link">
+                🗺️ 네이버 지도에서 보기
+            </a>
+        </div>
+    </div>
+
+    <!-- Attendance Modal -->
+    <div class="modal" id="attendanceModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('attendanceModal')">&times;</span>
+            <h2 class="modal-title">
+                ✋ 참석 인원
+                <span class="realtime-badge"><span class="realtime-dot"></span>실시간</span>
+            </h2>
+
+            <div class="attendance-section">
+                <div class="attendance-instruction">
+                    👆 본인 이름을 <strong>탭</strong>해서<br>
+                    참석 여부를 선택해주세요!
+                </div>
+
+                <div class="attendance-zones">
+                    <div class="zone zone-attending" id="attendingZone">
+                        <div class="zone-title">
+                            ✅ 참석 <span class="zone-count" id="attendingCount">0명</span>
+                        </div>
+                        <div class="names-container" id="attendingNames"></div>
+                    </div>
+
+                    <div class="zone zone-not-attending" id="notAttendingZone">
+                        <div class="zone-title">
+                            ❌ 불참 <span class="zone-count" id="notAttendingCount">0명</span>
+                        </div>
+                        <div class="names-container" id="notAttendingNames"></div>
+                    </div>
+
+                    <div class="zone zone-pending" id="pendingZone">
+                        <div class="zone-title">
+                            ⏳ 미정 <span class="zone-count" id="pendingCount">0명</span>
+                        </div>
+                        <div class="names-container" id="pendingNames"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Name Action Modal -->
+    <div class="overlay" id="actionOverlay" onclick="closeActionModal()"></div>
+    <div class="name-action-modal" id="nameActionModal">
+        <div class="name-action-title" id="actionTitle">김민준</div>
+        <div class="name-action-buttons">
+            <button class="action-btn attending" onclick="updateAttendance('attending')">✅ 참석할게요!</button>
+            <button class="action-btn not-attending" onclick="updateAttendance('not_attending')">❌ 못 갈 것 같아요</button>
+            <button class="action-btn cancel" onclick="closeActionModal()">취소</button>
+        </div>
+    </div>
+
+    <!-- Guestbook Modal -->
+    <div class="modal" id="guestbookModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('guestbookModal')">&times;</span>
+            <h2 class="modal-title">
+                📝 방명록
+                <span class="realtime-badge"><span class="realtime-dot"></span>실시간</span>
+            </h2>
+
+            <div class="guestbook-section">
+                <form class="guestbook-form" onsubmit="submitGuestbook(event)">
+                    <div class="form-group">
+                        <label>이름</label>
+                        <input type="text" id="guestName" placeholder="이름을 입력하세요" required maxlength="20">
+                    </div>
+                    <div class="form-group">
+                        <label>한마디</label>
+                        <textarea id="guestMessage" placeholder="올해 메테오와 함께한 순간, 송년회 기대 등..." required maxlength="200"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>이모지 선택</label>
+                        <div class="emoji-picker">
+                            <button type="button" class="emoji-btn selected" data-emoji="⚽">⚽</button>
+                            <button type="button" class="emoji-btn" data-emoji="🎉">🎉</button>
+                            <button type="button" class="emoji-btn" data-emoji="🍺">🍺</button>
+                            <button type="button" class="emoji-btn" data-emoji="❤️">❤️</button>
+                            <button type="button" class="emoji-btn" data-emoji="🔥">🔥</button>
+                            <button type="button" class="emoji-btn" data-emoji="⭐">⭐</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submitBtn">방명록 남기기</button>
+                </form>
+
+                <div class="guestbook-entries" id="guestbookEntries">
+                    <div class="loading">불러오는 중</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // ============================================
+        // 🔧 SUPABASE 설정 - 여기에 본인 정보 입력!
+        // ============================================
+        const SUPABASE_URL = 'https://ixanbygpftuuvrnmicbv.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_-2gmY3oeK92CriSdxlg6pg_YwvVN3Lk';
+
+        // Supabase 클라이언트 초기화
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // ============================================
+        // 별 효과
+        // ============================================
+        function createStars() {
+            const container = document.getElementById('starsContainer');
+            const starCount = 25;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                star.style.width = (Math.random() * 3 + 2) + 'px';
+                star.style.height = star.style.width;
+                container.appendChild(star);
+            }
+        }
+
+        // ============================================
+        // 모달
+        // ============================================
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            if (modalId === 'attendanceModal') loadAttendance();
+            if (modalId === 'guestbookModal') loadGuestbook();
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // ============================================
+        // 토스트 메시지
+        // ============================================
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        // ============================================
+        // 참석 현황 (Supabase)
+        // ============================================
+        let selectedMember = null;
+
+        async function loadAttendance() {
+            const { data, error } = await supabase
+                .from('attendance')
+                .select('*')
+                .order('name');
+
+            if (error) {
+                console.error('Error loading attendance:', error);
+                showToast('데이터 로딩 실패');
+                return;
+            }
+
+            renderAttendance(data);
+        }
+
+        function renderAttendance(data) {
+            const attending = data.filter(m => m.status === 'attending');
+            const notAttending = data.filter(m => m.status === 'not_attending');
+            const pending = data.filter(m => m.status === 'pending');
+
+            document.getElementById('attendingNames').innerHTML = attending.map(m =>
+                `<div class="name-tag" onclick="openActionModal('${m.name}')">${m.name}</div>`
+            ).join('');
+
+            document.getElementById('notAttendingNames').innerHTML = notAttending.map(m =>
+                `<div class="name-tag" onclick="openActionModal('${m.name}')">${m.name}</div>`
+            ).join('');
+
+            document.getElementById('pendingNames').innerHTML = pending.map(m =>
+                `<div class="name-tag" onclick="openActionModal('${m.name}')">${m.name}</div>`
+            ).join('');
+
+            document.getElementById('attendingCount').textContent = attending.length + '명';
+            document.getElementById('notAttendingCount').textContent = notAttending.length + '명';
+            document.getElementById('pendingCount').textContent = pending.length + '명';
+        }
+
+        function openActionModal(name) {
+            selectedMember = name;
+            document.getElementById('actionTitle').textContent = name;
+            document.getElementById('actionOverlay').classList.add('active');
+            document.getElementById('nameActionModal').classList.add('active');
+        }
+
+        function closeActionModal() {
+            document.getElementById('actionOverlay').classList.remove('active');
+            document.getElementById('nameActionModal').classList.remove('active');
+            selectedMember = null;
+        }
+
+        async function updateAttendance(status) {
+            if (!selectedMember) return;
+
+            const { error } = await supabase
+                .from('attendance')
+                .update({ status, updated_at: new Date().toISOString() })
+                .eq('name', selectedMember);
+
+            if (error) {
+                console.error('Error updating attendance:', error);
+                showToast('업데이트 실패');
+                return;
+            }
+
+            showToast(status === 'attending' ? '참석으로 변경됐어요! 🎉' : '불참으로 변경됐어요');
+            closeActionModal();
+            loadAttendance();
+        }
+
+        // 실시간 구독 - 참석
+        supabase
+            .channel('attendance-changes')
+            .on('postgres_changes', { event: '*', schema: 'public', table: 'attendance' }, () => {
+                if (document.getElementById('attendanceModal').classList.contains('active')) {
+                    loadAttendance();
+                }
+            })
+            .subscribe();
+
+        // ============================================
+        // 방명록 (Supabase)
+        // ============================================
+        let selectedEmoji = '⚽';
+
+        document.querySelectorAll('.emoji-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.emoji-btn').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedEmoji = btn.dataset.emoji;
+            });
+        });
+
+        async function loadGuestbook() {
+            const { data, error } = await supabase
+                .from('guestbook')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                console.error('Error loading guestbook:', error);
+                return;
+            }
+
+            renderGuestbook(data);
+        }
+
+        function renderGuestbook(entries) {
+            const container = document.getElementById('guestbookEntries');
+
+            if (!entries || entries.length === 0) {
+                container.innerHTML = '<div class="no-entries">아직 방명록이 없어요.<br>첫 번째로 남겨보세요! ✨</div>';
+                return;
+            }
+
+            container.innerHTML = entries.map(entry => {
+                const date = new Date(entry.created_at);
+                const dateStr = `${date.getMonth() + 1}/${date.getDate()} ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
+
+                return `
+                    <div class="guestbook-entry">
+                        <div class="entry-header">
+                            <span class="entry-name">${escapeHtml(entry.name)}</span>
+                            <span class="entry-date">${dateStr}</span>
+                        </div>
+                        <div class="entry-message">${escapeHtml(entry.message)}</div>
+                        <div class="entry-emoji">${entry.emoji}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        async function submitGuestbook(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('guestName').value.trim();
+            const message = document.getElementById('guestMessage').value.trim();
+
+            if (!name || !message) return;
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = '등록 중...';
+
+            const { error } = await supabase
+                .from('guestbook')
+                .insert([{ name, message, emoji: selectedEmoji }]);
+
+            submitBtn.disabled = false;
+            submitBtn.textContent = '방명록 남기기';
+
+            if (error) {
+                console.error('Error submitting guestbook:', error);
+                showToast('등록 실패');
+                return;
+            }
+
+            document.getElementById('guestName').value = '';
+            document.getElementById('guestMessage').value = '';
+            showToast('방명록이 등록됐어요! ✨');
+            loadGuestbook();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // 실시간 구독 - 방명록
+        supabase
+            .channel('guestbook-changes')
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'guestbook' }, () => {
+                if (document.getElementById('guestbookModal').classList.contains('active')) {
+                    loadGuestbook();
+                }
+            })
+            .subscribe();
+
+        // ============================================
+        // 초기화
+        // ============================================
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+        });
+    </script>
+</body>
+</html>
