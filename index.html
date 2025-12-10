@@ -936,9 +936,9 @@
             for (let i = 0; i < count; i++) {
                 const shootingStar = document.createElement('div');
                 shootingStar.className = 'shooting-star';
-                shootingStar.style.top = (Math.random() * 30 + 5) + '%'; // 5-35%
-                shootingStar.style.left = (Math.random() * 40 + 5) + '%'; // 5-45%
-                shootingStar.style.animationDelay = (i * 2.5) + 's';
+                shootingStar.style.top = (Math.random() * 45 + 5) + '%'; // 5-50%
+                shootingStar.style.left = (Math.random() * 55 + 5) + '%'; // 5-60%
+                shootingStar.style.animationDelay = (Math.random() * 5) + 's'; // 0-5초 랜덤
                 container.appendChild(shootingStar);
             }
         }
