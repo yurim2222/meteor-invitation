@@ -927,20 +927,37 @@
         }
 
         // ============================================
-        // 별똥별 효과 (랜덤 위치)
+        // 별똥별 효과 (랜덤 위치, 랜덤 간격)
         // ============================================
-        function createShootingStars() {
+        function createShootingStar() {
             const container = document.getElementById('starsContainer');
-            const count = Math.floor(Math.random() * 2) + 2; // 2-3개
+            const shootingStar = document.createElement('div');
+            shootingStar.className = 'shooting-star';
+            shootingStar.style.top = (Math.random() * 45 + 5) + '%'; // 5-50%
+            shootingStar.style.left = (Math.random() * 55 + 5) + '%'; // 5-60%
+            container.appendChild(shootingStar);
 
-            for (let i = 0; i < count; i++) {
-                const shootingStar = document.createElement('div');
-                shootingStar.className = 'shooting-star';
-                shootingStar.style.top = (Math.random() * 45 + 5) + '%'; // 5-50%
-                shootingStar.style.left = (Math.random() * 55 + 5) + '%'; // 5-60%
-                shootingStar.style.animationDelay = (Math.random() * 5) + 's'; // 0-5초 랜덤
-                container.appendChild(shootingStar);
-            }
+            // 애니메이션 끝나면 제거
+            shootingStar.addEventListener('animationend', () => {
+                shootingStar.remove();
+            });
+        }
+
+        function startShootingStars() {
+            // 첫 별똥별: 0.3초 후
+            setTimeout(() => {
+                createShootingStar();
+                scheduleNextShootingStar();
+            }, 300);
+        }
+
+        function scheduleNextShootingStar() {
+            // 0.4-2초 랜덤 간격
+            const delay = Math.random() * 1600 + 400; // 400-2000ms
+            setTimeout(() => {
+                createShootingStar();
+                scheduleNextShootingStar();
+            }, delay);
         }
 
         // ============================================
@@ -1166,7 +1183,7 @@
         // ============================================
         document.addEventListener('DOMContentLoaded', () => {
             createStars();
-            createShootingStars();
+            startShootingStars();
         });
     </script>
 </body>
