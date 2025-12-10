@@ -80,9 +80,9 @@
             position: absolute;
             width: 150px;
             height: 3px;
-            background: linear-gradient(90deg, #fff, #ffd700, transparent);
+            background: linear-gradient(90deg, transparent, #ffd700, #fff);
             border-radius: 50%;
-            transform: rotate(135deg);
+            transform: rotate(45deg);
             animation: shoot 6s ease-in-out infinite;
             opacity: 0;
             box-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700;
@@ -95,7 +95,7 @@
             height: 10px;
             background: white;
             border-radius: 50%;
-            left: -5px;
+            right: -5px;
             top: -3.5px;
             box-shadow: 0 0 15px #fff, 0 0 25px #ffd700, 0 0 35px #fff;
             animation: headSparkle 0.5s ease-in-out infinite;
@@ -104,7 +104,7 @@
         .shooting-star::after {
             content: '✦';
             position: absolute;
-            left: -20px;
+            right: -25px;
             top: -12px;
             font-size: 16px;
             color: #fff;
@@ -113,9 +113,9 @@
         }
 
         @keyframes shoot {
-            0% { transform: rotate(135deg) translateX(0); opacity: 0; }
+            0% { transform: rotate(45deg) translateX(0); opacity: 0; }
             5% { opacity: 1; }
-            40% { transform: rotate(135deg) translateX(-400px); opacity: 0; }
+            40% { transform: rotate(45deg) translateX(400px); opacity: 0; }
             100% { opacity: 0; }
         }
 
@@ -157,21 +157,8 @@
         .title {
             font-size: 28px;
             font-weight: 800;
-            color: #fff;
-            text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ffaa00, 0 0 40px #ffaa00;
+            color: #ffd700;
             margin-bottom: 10px;
-            animation: textGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes textGlow {
-            0%, 100% {
-                text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ffaa00;
-                color: #fff;
-            }
-            50% {
-                text-shadow: 0 0 20px #ffd700, 0 0 30px #ffd700, 0 0 40px #ffaa00, 0 0 50px #ffaa00;
-                color: #fffacd;
-            }
         }
 
         .subtitle {
@@ -179,23 +166,11 @@
             color: #fff;
             line-height: 1.6;
             margin-bottom: 15px;
-            text-shadow: 0 0 8px #ffd700, 0 0 15px rgba(255, 215, 0, 0.5);
         }
 
         .highlight {
-            color: #fff;
+            color: #ffd700;
             font-weight: 700;
-            text-shadow: 0 0 15px #ffd700, 0 0 25px #ffd700, 0 0 35px #ffaa00;
-            animation: highlightGlow 1.5s ease-in-out infinite;
-        }
-
-        @keyframes highlightGlow {
-            0%, 100% {
-                text-shadow: 0 0 15px #ffd700, 0 0 25px #ffd700;
-            }
-            50% {
-                text-shadow: 0 0 25px #ffd700, 0 0 35px #ffd700, 0 0 45px #ffaa00;
-            }
         }
 
         /* Buttons */
@@ -766,9 +741,9 @@
         <!-- Stars Image Section -->
         <div class="stars-container" id="starsContainer">
             <img src="image1.png.jpg" alt="Meteor Year-End Gathering" class="main-image">
-            <div class="shooting-star" style="top: 15%; left: 75%;"></div>
-            <div class="shooting-star" style="top: 30%; left: 85%; animation-delay: 2s;"></div>
-            <div class="shooting-star" style="top: 10%; left: 55%; animation-delay: 4s;"></div>
+            <div class="shooting-star" style="top: 10%; left: 5%;"></div>
+            <div class="shooting-star" style="top: 20%; left: 15%; animation-delay: 2s;"></div>
+            <div class="shooting-star" style="top: 5%; left: 25%; animation-delay: 4s;"></div>
         </div>
 
         <!-- Header Text -->
